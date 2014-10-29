@@ -26,7 +26,7 @@ app.get('/test', function (req, res) {
         if (!err) {
             console.log(result);
         }
-        res.render('test', { result: result, err: err, layout: false });
+        res.render('test', { result: JSON.stringify(result), err: err, layout: false });
     });
     //res.render('test', { layout: false, title: "你们好", name: "335553", err: "444" });
 });
