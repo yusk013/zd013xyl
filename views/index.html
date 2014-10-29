@@ -1,0 +1,118 @@
+﻿
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="cxj">
+    <meta name="Author" content="2001届计算机三班聚会">
+    <meta name="Keywords" content="2001届计算机三班聚会">
+    <meta name="Description" content="2001届计算机三班聚会">
+    <link href="/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="/lib/ligerUI/skins/Gray/css/all.css" rel="stylesheet" />
+    <script src="/lib/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
+    <script src="/lib/ligerUI/js/ligerui.all.js" type="text/javascript"></script>
+    <script src="/lib/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
+    <script src="/lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <title>2001届计算机三班聚会</title>
+    <style>
+        .l-main { margin: auto; padding: 0; height: 100%; text-align: center; background: url('/lib/images/bg.jpg') repeat-x top; position: relative; border-width: 1px; border-style: solid; }
+        .l-LOGIN { margin-right: auto; margin-left: auto; margin-top: 230px; padding: 0; width: 508px; height: 249px; background: url('/lib/images/loginbg.jpg') repeat-x bottom; position: relative; border-top: 0px; }
+        .l-logo { margin-right: auto; margin-left: auto; padding: 0; width: 498px; height: 60px; line-height: 59px; border-width: 0px; border-style: solid; position: relative; font-size: 28px; font-family: 华文琥珀; color: #ffffff; }
+
+        .l-input { margin-right: auto; margin-left: auto; margin-top: 0px; padding: 0; width: 498px; height: 160px; line-height: 35px; }
+        .l-input2 { margin-right: auto; margin-left: auto; margin-top: 0px; padding: 0; width: 498px; height: 40px; line-height: 35px; text-align: center; font-size: 18px; font-family: 黑体; color: #ffffff; }
+
+        .l-btn { width: 90px; height: 29px; border-width: 0px; border-style: solid; background: url('/lib/images/btn.jpg'); font-family: 黑体; color: #ffffff; }
+    </style>
+</head>
+
+
+
+<body style="padding:0px;margin:0;  " onkeydown="KeyDown()">
+
+    <div class="l-main">
+
+        <div class="l-LOGIN">
+            <div class="l-logo">
+                2001计算机三班聚会入口
+            </div>
+            <div class="l-input">
+                <form method="post" name="form2" id="form2">
+                    <div class="l-input2"><span>姓&nbsp;&nbsp;名：<input id="xingming" name="xingming" size="20" onfocus="this.select()" onmouseover="this.focus();" maxlength="20" /></span></div>
+                    <div class="l-input2"><span>手机号：<input name="shouji" id="shouji" size="20" maxlength="20" onfocus="this.select()" onmouseover="this.focus();" /></span></div>
+                    <div class="l-input2"><span>验证码：<input id="LouHB_YanZhengM" name="LouHB_YanZhengM" size="16" maxlength="20" onfocus="this.select()" onmouseover="this.focus();" /><img src="checkcode.asp " alt="验证码,看不清楚?请点击刷新验证码" height="10" style="cursor : pointer;" onclick="this.src='checkcode.asp?t='+(new Date().getTime());"></span></div>
+                    <div class="l-input2">
+                        <span> <input type="button" value="提交" id="loginBtn" name="loginBtn" onclick="checkinput();" class="l-btn" /></span>&nbsp;&nbsp;
+                        <span> <input type="reset" value="重置" class="l-btn" /></span>
+                    </div>
+                </form>
+                <div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script language="javascript">
+        function checkinput() {
+            var xingm = $('#xingming').val();
+            var shouj = $('#shouji').val();
+            var yzm = $('#LouHB_YanZhengM').val();
+            if (xingm.length <= 1 || xingm.length > 3) {
+                $.ligerDialog.warn('用户名格式不正确！', '错误', function () {
+                    $('#xingming').focus();
+                });
+                return false;
+            }
+            if (shouj.length != 11) {
+                $.ligerDialog.warn('手机输入格式不正确！', '错误', function () {
+                    $('#shouji').focus();
+                });
+                return false;
+            }
+            if (yzm.length != 4) {
+                $.ligerDialog.warn('请输入四位验证码！', '错误', function () {
+                    $('#LouHB_YanZhengM').focus();
+                });
+                return false;
+            }
+
+            var data = {
+                xingming: xingm,
+                shouji: shouj,
+                yzm: yzm
+            };
+
+
+            $.post("CheckLogin.asp", data, function (result) {
+                if (result == "yzm") {
+                    $.ligerDialog.warn('验证码错误！', '错误', function () {
+                        $('#LouHB_YanZhengM').focus();
+                    });
+                    return false;
+                }
+
+                if (result == "yhm") {
+                    $.ligerDialog.warn('用户名或者密码错误！', '错误', function () {
+                        $('#LouHB_YanZhengM').focus();
+                    });
+                    return false;
+                }
+
+                if (result == "ok") {
+                    window.location.href = "main.asp";
+                }
+
+            })
+
+        }
+
+        function KeyDown() {
+            if (event.keyCode == 13) {
+                event.returnValue = false;
+                event.cancel = true;
+                $('#loginBtn').click();
+            }
+        }
+
+    </script>
+</body>
+</html>
