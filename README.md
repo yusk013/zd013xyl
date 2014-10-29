@@ -3,7 +3,7 @@
 
 该代码系基于nodejs 0.10.x + express4.x开发的
 
-IDE 是 vs2013 + nodejs插件
+IDE 是 vs2013 + nodejs插件（各种文本编辑器也可以）
 
 希望同学们相助。
 
