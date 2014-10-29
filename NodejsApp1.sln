@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodejsApp1", "NodejsApp1.njsproj", "{79569966-ECD1-4CC5-83CF-3EE67EF26E54}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "013txl", "013txl.njsproj", "{79569966-ECD1-4CC5-83CF-3EE67EF26E54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
